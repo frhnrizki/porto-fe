@@ -10,7 +10,7 @@ export const useSubmitTestimonial = () => {
         success.value = false;
 
         try {
-            const apiUrl = config.public.apiBase ? `${config.public.apiBase}/testimonials` : 'http://localhost:3001/testimonials';
+            const apiUrl = `${config.public.apiBase}/testimonials`;
 
             await $fetch(apiUrl, {
                 method: 'POST',

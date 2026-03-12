@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     modules: ['@nuxtjs/tailwindcss', '@vueuse/motion/nuxt'],
     runtimeConfig: {
         public: {
-            apiBase: 'http://localhost:3001'
+            apiBase: '' // Overridden by NUXT_PUBLIC_API_BASE environment variable
         }
     },
     app: {
