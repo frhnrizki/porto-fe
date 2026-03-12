@@ -7,7 +7,7 @@
           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 800, type: 'spring', bounce: 0.1 } }">
         Featured works
       </h2>
-      <a href="#" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#f8f9fa] hover:bg-gray-100 text-gray-900 text-[13.5px] font-medium transition-colors"
+      <NuxtLink to="/works" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#f8f9fa] hover:bg-gray-100 text-gray-900 text-[13.5px] font-medium transition-colors"
          v-motion
          :initial="{ opacity: 0, x: 20 }"
          :visibleOnce="{ opacity: 1, x: 0, transition: { duration: 800, delay: 100, type: 'spring', bounce: 0.1 } }">
@@ -16,7 +16,7 @@
           <path d="M5 12h14"/>
           <path d="m12 5 7 7-7 7"/>
         </svg>
-      </a>
+      </NuxtLink>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -26,12 +26,12 @@
            :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 800, delay: 100 + (index * 150), type: 'spring', bounce: 0.1 } }">
         <!-- Skeleton / Loading fallback -->
         <div class="absolute inset-0 bg-gray-200 animate-pulse -z-10"></div>
-        
+
         <img :src="project.imageUrl" :alt="project.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy" />
-        
+
         <!-- Overlay -->
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        
+
         <!-- Content that appears on hover/base -->
         <div class="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
           <p class="text-white/80 text-sm font-medium mb-1">{{ project.category }}</p>

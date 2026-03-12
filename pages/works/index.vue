@@ -1,0 +1,242 @@
+<template>
+  <div>
+    <!-- Page Header -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+      <h1
+        class="text-[2rem] sm:text-[2.4rem] lg:text-[2.6rem] font-medium tracking-tight text-gray-900 max-w-xl leading-[1.2]"
+        v-motion
+        :initial="{ opacity: 0, y: 30 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 900, type: 'keyframes', ease: [0.16, 1, 0.3, 1] } }"
+      >
+        Designing seamless experiences
+        <span class="font-semibold"> that elevate brands and engage users</span>
+      </h1>
+    </section>
+
+    <!-- Works Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <!-- Loading Skeleton -->
+      <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div
+          v-for="n in 6"
+          :key="n"
+          class="rounded-3xl bg-gray-100 animate-pulse aspect-[4/3]"
+        ></div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <NuxtLink
+          v-for="(project, index) in displayProjects"
+          :key="project.id"
+          :to="project.link || `/works/${project.id}`"
+          :target="project.link && project.link !== '#' && !project.link.startsWith('/') ? '_blank' : undefined"
+          class="group relative rounded-3xl overflow-hidden aspect-[4/3] block cursor-pointer"
+          v-motion
+          :initial="{ opacity: 0, y: 50 }"
+          :visibleOnce="{
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 700,
+              delay: 80 + index * 100,
+              type: 'spring',
+              bounce: 0.08,
+            },
+          }"
+        >
+          <!-- Background Image -->
+          <div
+            v-if="project.imageUrl"
+            class="absolute inset-0 bg-gray-200"
+          >
+            <img
+              :src="project.imageUrl"
+              :alt="project.title"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Fallback Colored Background -->
+          <div
+            v-else
+            class="absolute inset-0"
+            :style="{ background: project.bgColor || '#1a1a1a' }"
+          ></div>
+
+          <!-- Bottom Gradient Overlay -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"
+          ></div>
+
+          <!-- Card Content -->
+          <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span
+                v-for="tag in project.tags"
+                :key="tag"
+                class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-medium text-white border border-white/30 bg-white/10 backdrop-blur-sm"
+              >
+                {{ tag }}
+              </span>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-white text-[1.15rem] sm:text-[1.3rem] font-semibold leading-tight">
+              {{ project.title }}
+            </h2>
+          </div>
+
+          <!-- Hover shine effect -->
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            style="background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%)"
+          ></div>
+        </NuxtLink>
+      </div>
+
+      <!-- Empty State -->
+      <div
+        v-if="!loading && displayProjects.length === 0"
+        class="flex flex-col items-center justify-center py-32 text-gray-400"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mb-4 opacity-40">
+          <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+          <circle cx="9" cy="9" r="2"/>
+          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+        </svg>
+        <p class="text-lg font-medium text-gray-500">No projects yet</p>
+        <p class="text-sm text-gray-400 mt-1">Check back soon for new work!</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <CtaFooter />
+  </div>
+</template>
+
+<script setup lang="ts">
+import CtaFooter from '~/components/sections/CtaFooter.vue'
+
+definePageMeta({
+  layout: 'portfolio',
+})
+
+interface Project {
+  id: string | number
+  title: string
+  tags: string[]
+  imageUrl: string
+  link: string
+  bgColor?: string
+}
+
+// Fallback static projects (match the design screenshot style)
+const staticProjects: Project[] = [
+  {
+    id: 's1',
+    title: 'FMC Dashboard Telkomsel',
+    tags: ['Web Dashboard'],
+    imageUrl: '',
+    link: '#',
+    bgColor: '#111111',
+  },
+  {
+    id: 's2',
+    title: 'Myoscope',
+    tags: ['Healthcare App', 'AI-Based', 'Heart Attack Detection'],
+    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop',
+    link: '#',
+  },
+  {
+    id: 's3',
+    title: 'TumbuhKita',
+    tags: ['Healthcare', 'Website'],
+    imageUrl: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=800&auto=format&fit=crop',
+    link: '#',
+  },
+  {
+    id: 's4',
+    title: 'Self-Ordering Apps',
+    tags: ['E-Commerce (Self-Ordering)', 'Mobile Design'],
+    imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop',
+    link: '#',
+    bgColor: '#111111',
+  },
+  {
+    id: 's5',
+    title: 'Football Landing Page',
+    tags: ['Landing Page', 'Web Design'],
+    imageUrl: '',
+    link: '#',
+    bgColor: '#1a3fcf',
+  },
+  {
+    id: 's6',
+    title: 'Game-Based Learning Platform – Landing Page',
+    tags: ['Landing Page'],
+    imageUrl: '',
+    link: '#',
+    bgColor: '#2d1b69',
+  },
+  {
+    id: 's7',
+    title: 'The Riv...',
+    tags: ['Residence Landing Page'],
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+    link: '#',
+  },
+  {
+    id: 's8',
+    title: 'Mail Management System',
+    tags: ['Mail Management System', 'Web Design'],
+    imageUrl: '',
+    link: '#',
+    bgColor: '#5b21b6',
+  },
+]
+
+const $api = useApi()
+const loading = ref(true)
+const apiProjects = ref<Project[]>([])
+
+const parseTags = (techStack: string | null | undefined): string[] => {
+  if (!techStack) return []
+  return techStack
+    .split(',')
+    .map((t: string) => t.trim())
+    .filter((t: string) => t.length > 0)
+}
+
+const fetchProjects = async () => {
+  try {
+    const data = await $api<any[]>('/projects').catch(() => [])
+    if (data && data.length > 0) {
+      apiProjects.value = data
+        .filter((item: any) => item.status !== 'draft')
+        .map((item: any): Project => ({
+          id: item.id,
+          title: item.title,
+          tags: parseTags(item.tech_stack),
+          imageUrl: item.image_url || '',
+          link: item.project_url && item.project_url !== '#' ? item.project_url : '',
+          bgColor: '#111111',
+        }))
+    }
+  } catch (err) {
+    console.error('Failed to load projects:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+const displayProjects = computed<Project[]>(() =>
+  apiProjects.value.length > 0 ? apiProjects.value : staticProjects,
+)
+
+onMounted(async () => {
+  await fetchProjects()
+})
+</script>

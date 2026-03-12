@@ -14,9 +14,9 @@
           :initial="{ opacity: 0, y: 30 }"
           :enter="{ opacity: 1, y: 0, transition: { duration: 1200, type: 'keyframes', ease: [0.16, 1, 0.3, 1], delay: 100 } }"
         >
-          <a href="#" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors">Work</a>
-          <a href="#" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors">About</a>
-          <a href="#" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+          <NuxtLink to="/works" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors" active-class="text-gray-900 font-medium">Work</NuxtLink>
+          <a href="/#about" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors">About</a>
+          <a href="/#contact" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
           <NuxtLink to="/login" class="px-5 py-2 rounded-full text-[13px] font-medium bg-gray-50 border border-gray-100 text-gray-700 hover:bg-gray-100 transition-colors ml-4 shadow-sm">
             Admin Login
           </NuxtLink>
