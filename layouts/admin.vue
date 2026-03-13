@@ -18,6 +18,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           Testimonials
         </NuxtLink>
+        <NuxtLink to="/admin/experiences" class="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-gray-200 transition text-gray-700 font-medium" active-class="bg-gray-200 text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Experiences
+        </NuxtLink>
+        <NuxtLink to="/admin/stacks" class="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-gray-200 transition text-gray-700 font-medium" active-class="bg-gray-200 text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.1 6.02a2 2 0 0 0 0 3.66l9.07 3.84a2 2 0 0 0 1.66 0l9.07-3.84a2 2 0 0 0 0-3.66z"/><path d="m2.1 11.84 9.07 3.84a2 2 0 0 0 1.66 0l9.07-3.84"/><path d="m2.1 16.16 9.07 3.84a2 2 0 0 0 1.66 0l9.07-3.84"/></svg>
+          Stacks
+        </NuxtLink>
       </nav>
       <div class="p-4 border-t border-gray-200">
         <button @click="logout" class="w-full text-left px-4 py-2 hover:bg-red-50 hover:text-red-600 focus:text-red-600 rounded-md transition flex items-center group">

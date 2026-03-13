@@ -3,13 +3,13 @@
     <!-- Page Header -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
       <h1
-        class="text-[2rem] sm:text-[2.4rem] lg:text-[2.6rem] font-medium tracking-tight text-gray-900 max-w-xl leading-[1.2]"
+        class="text-[2rem] sm:text-[2.4rem] lg:text-[2.2rem] font-medium tracking-tight text-gray-900 max-w-xl leading-[1.2]"
         v-motion
         :initial="{ opacity: 0, y: 30 }"
         :enter="{ opacity: 1, y: 0, transition: { duration: 900, type: 'keyframes', ease: [0.16, 1, 0.3, 1] } }"
       >
-        Designing seamless experiences
-        <span class="font-semibold"> that elevate brands and engage users</span>
+        <span class="text-gray-500">Designing seamless experiences</span>
+        <span class="font-medium"> that elevate brands and engage users</span>
       </h1>
     </section>
 
@@ -29,8 +29,7 @@
         <NuxtLink
           v-for="(project, index) in displayProjects"
           :key="project.id"
-          :to="project.link || `/works/${project.id}`"
-          :target="project.link && project.link !== '#' && !project.link.startsWith('/') ? '_blank' : undefined"
+          :to="`/works/${project.id}`"
           class="group relative rounded-3xl overflow-hidden aspect-[4/3] block cursor-pointer"
           v-motion
           :initial="{ opacity: 0, y: 50 }"
