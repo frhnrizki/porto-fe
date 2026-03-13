@@ -16,7 +16,7 @@
         >
           <NuxtLink to="/works" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors" active-class="text-gray-900 font-medium">Work</NuxtLink>
           <NuxtLink to="/about" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors" active-class="text-gray-900 font-medium">About</NuxtLink>
-          <a href="/#contact" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+          <NuxtLink to="/contact" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors" active-class="text-gray-900 font-medium">Contact</NuxtLink>
           <NuxtLink to="/login" class="px-5 py-2 rounded-full text-[13px] font-medium bg-gray-50 border border-gray-100 text-gray-700 hover:bg-gray-100 transition-colors ml-4 shadow-sm">
             Admin Login
           </NuxtLink>

@@ -23,7 +23,7 @@
           <NuxtLink to="/" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">Home</NuxtLink>
           <NuxtLink to="/works" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">Works</NuxtLink>
           <NuxtLink to="/about" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">About</NuxtLink>
-          <a href="/#contact" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">Contact</a>
+          <NuxtLink to="/contact" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium" active-class="text-white underline underline-offset-8">Contact</NuxtLink>
         </div>
         <div class="flex flex-col gap-6">
           <a href="#" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">LinkedIn</a>

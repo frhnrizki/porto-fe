@@ -214,7 +214,6 @@ const fetchProjects = async () => {
     const data = await $api<any[]>('/projects').catch(() => [])
     if (data && data.length > 0) {
       apiProjects.value = data
-        .filter((item: any) => item.status !== 'draft')
         .map((item: any): Project => ({
           id: item.id,
           title: item.title,
