@@ -78,7 +78,8 @@
 
           <div class="mt-10 w-full space-y-4">
             <a 
-              href="#" 
+              href="/pageweb/CV_Farhan Rizki Fauzi.pdf" 
+              target="_blank"
               class="w-full bg-black py-4 rounded-[18px] text-[16px] font-semibold text-white shadow-lg hover:shadow-xl hover:bg-gray-900 transition-all flex items-center justify-center border border-gray-100/50"
             >
               Resume

@@ -12,7 +12,7 @@
           <span class="text-white">together.</span>
         </h2>
 
-        <a href="mailto:farhanrizki475@gmail.com" class="inline-flex items-center justify-center px-6 py-3.5 text-[15px] font-medium rounded-[14px] text-black bg-white hover:bg-gray-100 transition-colors shadow-sm">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=farhanrizki475@gmail.com" target="_blank" class="inline-flex items-center justify-center px-6 py-3.5 text-[15px] font-medium rounded-[14px] text-black bg-white hover:bg-gray-100 transition-colors shadow-sm">
           Let's Collaborate
         </a>
       </div>
@@ -26,8 +26,8 @@
           <NuxtLink to="/contact" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium" active-class="text-white underline underline-offset-8">Contact</NuxtLink>
         </div>
         <div class="flex flex-col gap-6">
-          <a href="#" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">LinkedIn</a>
-          <a href="#" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">Instagram</a>
+          <a href="https://www.linkedin.com/in/farhanrizkifauzi" target="_blank" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">LinkedIn</a>
+          <a href="https://www.instagram.com/frhnrizki?igsh=MXd2bHp3amd2Z2M4aw==" target="_blank" class="text-white hover:text-gray-300 transition-colors text-[15px] font-medium">Instagram</a>
         </div>
       </div>
 
@@ -35,7 +35,7 @@
 
     <!-- Middle Section: Email -->
     <div class="max-w-7xl mx-auto w-full flex justify-center items-center mt-32 mb-16">
-      <a href="mailto:farhanrizki475@gmail.com" class="text-gray-300 hover:text-white transition-colors text-[20px] md:text-[24px] tracking-tight">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=farhanrizki475@gmail.com" target="_blank" class="text-gray-300 hover:text-white transition-colors text-[20px] md:text-[24px] tracking-tight">
         farhanrizki475@gmail.com
       </a>
     </div>
