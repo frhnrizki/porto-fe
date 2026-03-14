@@ -145,24 +145,7 @@ const fetchProject = async () => {
     }
   } catch (err) {
     console.error('Failed to load project', err)
-
-    // Provide a detailed fallback for showcase purposes if API fails/missing
-    project.value = {
-      title: 'Myoscope',
-      description: 'Myoscope is a digital health application designed to help patients independently monitor their heart condition while also assisting doctors in verifying medical data. Patients can record their heartbeat sounds through a connected device, and the recordings are analyzed using an early prediction system. The analysis results are displayed as conditions (Normal or Myocardial Infarction) along with the doctor\'s verification status, ensuring accurate and reliable monitoring for patients.\n\nFor doctors, Myoscope provides a dedicated dashboard to manage patient data, verify recorded results, and track each patient\'s heart condition history. The application includes features such as filtering, notifications, and data management tools that accelerate the early diagnosis process while maintaining workflow efficiency. Through this approach, Myoscope connects patients and doctors within a single integrated platform to support early detection of heart problems.',
-      process: 'The process began with user research to understand the workflows of both doctors and patients in heart condition monitoring. I designed a responsive web dashboard for doctors and administrators, along with a mobile UI that enables real-time health tracking for patients and doctors. The entire design was developed through wireframes, prototypes, and an integrated design system to ensure consistent visuals. Cross-team collaboration was conducted using Trello and Figma to maintain efficient handoffs, accompanied by a design-to-development audit to ensure alignment between implementation and the original design.',
-      impact: 'The design improved patient data accessibility by 40%, accelerated the handoff process to developers by 25%, and enhanced doctors\' efficiency in verifying medical data by 30%. Additionally, the implementation of an integrated design system maintained 100% visual consistency across platforms and reduced design-to-development mismatches by 90%, resulting in a faster and more stable development workflow.',
-      tech_stack: 'Healthcare App (AI-Based) • Heart Attack Detector Based on Phonocardiogram Signals Using Deep Learning',
-      project_date: '2025-08-17',
-      client: 'BRIN (Badan Riset dan Inovasi Nasional)',
-      project_url: '#',
-      image_url: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1600&auto=format&fit=crop',
-      gallery_urls: [
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=800&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1600&auto=format&fit=crop'
-      ]
-    }
+    // Removed dummy fallback
   }
 }
 
@@ -171,7 +154,7 @@ const fetchAllProjects = async () => {
     const data = await $api<any[]>('/projects').catch(() => [])
     if (data && data.length > 0) {
       const projectId = route.params.overview
-      allProjects.value = data.filter(p => p.status === 'published' && String(p.id) !== String(projectId))
+      allProjects.value = data.filter(p => String(p.id) !== String(projectId))
     }
   } catch (err) {
     console.error('Failed to load all projects', err)
@@ -179,24 +162,11 @@ const fetchAllProjects = async () => {
 }
 
 const moreWorks = computed(() => {
-  // If no dynamic works or not enough, return fallbacks
+  // If no dynamic works, return empty array
   if (allProjects.value.length > 0) {
     return allProjects.value.slice(0, 2)
   }
-  return [
-    {
-      id: 's1',
-      title: 'FMC Dashboard Telkomsel',
-      tech_stack: 'Web Dashboard',
-      image_url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop'
-    },
-    {
-      id: 's3',
-      title: 'TumbuhKita',
-      tech_stack: 'Healthcare, Website',
-      image_url: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=800&auto=format&fit=crop'
-    }
-  ]
+  return []
 })
 
 onMounted(async () => {

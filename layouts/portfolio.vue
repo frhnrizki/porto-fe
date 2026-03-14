@@ -20,14 +20,14 @@ watch(isMenuOpen, (val) => {
 
 <template>
   <div class="min-h-screen bg-white text-gray-900 font-sans selection:bg-purple-100 selection:text-purple-900">
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md">
+    <header class="fixed top-0 left-0 right-0 z-[110] bg-white/90 backdrop-blur-md border-b border-gray-50">
       <nav class="max-w-[1536px] w-full mx-auto px-4 lg:px-12 xl:px-10 h-24 flex items-center justify-between">
         <NuxtLink to="/" class="flex items-center"
           v-motion
           :initial="{ opacity: 0, y: 30 }"
           :enter="{ opacity: 1, y: 0, transition: { duration: 1200, type: 'keyframes', ease: [0.16, 1, 0.3, 1] } }"
         >
-          <img src="/pageweb/logosaya.png" alt="Farhan Rizki Logo" class="h-[28px] lg:h-[28px] w-auto object-contain" />
+          <img src="/pageweb/logosaya.png" alt="Farhan Rizki Logo" class="h-[22px] sm:h-[24px] lg:h-[28px] w-auto object-contain" />
         </NuxtLink>
         <div class="flex items-center gap-4">
           <!-- Desktop Nav -->
@@ -73,16 +73,12 @@ watch(isMenuOpen, (val) => {
         leave-from-class="opacity-100 translate-y-0"
         leave-to-class="opacity-0 -translate-y-full"
       >
-        <div v-if="isMenuOpen" class="fixed inset-0 z-[50] md:hidden">
+        <div v-if="isMenuOpen" class="fixed top-24 left-0 right-0 bottom-0 z-[100] md:hidden">
           <!-- Backdrop -->
-          <div @click="isMenuOpen = false" class="absolute inset-0 bg-black/5 backdrop-blur-[2px]"></div>
+          <div @click="isMenuOpen = false" class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
           
           <!-- Menu Content -->
           <div class="relative bg-white shadow-2xl pb-12 border-b border-gray-100 flex flex-col h-fit">
-            <!-- Menu Spacer for Header -->
-            <div class="h-24 shrink-0 px-4 flex items-center">
-               <img src="/pageweb/logosaya.png" alt="Farhan Rizki Logo" class="h-10 w-auto object-contain" />
-            </div>
 
             <!-- Menu Links -->
             <div class="px-4 sm:px-6 py-4 flex flex-col space-y-7">
