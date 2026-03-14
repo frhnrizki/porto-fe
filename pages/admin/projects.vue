@@ -186,7 +186,7 @@
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <button type="submit" :disabled="saving" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-6 py-2.5 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50">
-                {{ saving ? 'Saving...' : (editingId ? 'Update' : 'Save') }}
+                {{ saving ? (uploadProgress || 'Saving...') : (editingId ? 'Update' : 'Save') }}
               </button>
               <button type="button" @click="showModal = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                 Cancel
@@ -214,6 +214,7 @@ const { data: projects, pending, refresh } = useAsyncData('admin-projects',
 
 const showModal = ref(false)
 const saving = ref(false)
+const uploadProgress = ref('')
 const editingId = ref<string | null>(null)
 const fileInput = ref<File | null>(null)
 const galleryInput = ref<HTMLInputElement | null>(null)
@@ -280,13 +281,21 @@ const openEditModal = (project: any) => {
 
 const handleGalleryUpload = (e: any) => {
   const files = Array.from(e.target.files) as File[]
+  const MAX_SIZE = 5 * 1024 * 1024 // 5MB
+  
+  const oversized = files.filter(f => f.size > MAX_SIZE)
+  if (oversized.length > 0) {
+    alert(`The following files are too large (max 5MB):\n${oversized.map(f => f.name).join(', ')}`)
+    if (galleryInput.value) galleryInput.value.value = ''
+    return
+  }
+
   files.forEach(file => {
     newGalleryImages.value.push({
       file,
       preview: URL.createObjectURL(file)
     })
   })
-  // Reset input value so same file can be selected again if removed
   if (galleryInput.value) galleryInput.value.value = ''
 }
 
@@ -300,7 +309,13 @@ const removeNewGalleryImage = (index: number) => {
 }
 
 const handleFileUpload = (e: any) => {
-  fileInput.value = e.target.files[0]
+  const file = e.target.files[0]
+  if (file && file.size > 5 * 1024 * 1024) {
+    alert('Main thumbnail must be less than 5MB')
+    e.target.value = ''
+    return
+  }
+  fileInput.value = file
 }
 
 const saveProject = async () => {
@@ -310,6 +325,7 @@ const saveProject = async () => {
 
     // 1. Upload thumbnail if exists
     if (fileInput.value) {
+      uploadProgress.value = 'Uploading thumbnail...'
       const formData = new FormData()
       formData.append('file', fileInput.value)
 
@@ -320,21 +336,22 @@ const saveProject = async () => {
       finalImageUrl = uploadRes.url
     }
 
-    // 2. Upload new gallery images
+    // 2. Upload new gallery images SEQUIENTIALLY to avoid 503 errors
     const uploadedGalleryUrls = [...form.gallery_urls]
     if (newGalleryImages.value.length > 0) {
-      const uploadPromises = newGalleryImages.value.map(async (item) => {
+      for (let i = 0; i < newGalleryImages.value.length; i++) {
+        const item = newGalleryImages.value[i]
+        uploadProgress.value = `Uploading gallery ${i + 1}/${newGalleryImages.value.length}...`
+        
         const formData = new FormData()
         formData.append('file', item.file)
+        
         const res: any = await $api('/projects/upload', {
           method: 'POST',
           body: formData
         })
-        return res.url
-      })
-      
-      const newUrls = await Promise.all(uploadPromises)
-      uploadedGalleryUrls.push(...newUrls)
+        uploadedGalleryUrls.push(res.url)
+      }
     }
 
     // Sanitize payload: convert empty strings to null for DB consistency
