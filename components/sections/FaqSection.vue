@@ -11,7 +11,7 @@
           <span class="text-gray-500 font-medium">Answers to common questions to help you understand</span>
           <span class="text-[#111] font-medium"> the process and how we can work together</span>
         </h3>
-        <a href="mailto:hello@example.com" class="inline-flex px-8 py-3.5 bg-[#111111] text-white rounded-[14px] text-[15px] font-medium hover:bg-[#9520D4] transition-colors shadow-lg">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=farhanrizki475@gmail.com" target="_blank" class="inline-flex px-8 py-3.5 bg-[#111111] text-white rounded-[14px] text-[15px] font-medium hover:bg-[#9520D4] transition-colors shadow-lg">
           Email Me
         </a>
       </div>
