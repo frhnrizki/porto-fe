@@ -22,12 +22,12 @@ watch(isMenuOpen, (val) => {
   <div class="min-h-screen bg-white text-gray-900 font-sans selection:bg-purple-100 selection:text-purple-900">
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md">
       <nav class="max-w-[1536px] w-full mx-auto px-4 lg:px-12 xl:px-10 h-24 flex items-center justify-between">
-        <NuxtLink to="/" class="text-lg lg:text-[20px] tracking-tight text-gray-900 font-normal"
+        <NuxtLink to="/" class="flex items-center"
           v-motion
           :initial="{ opacity: 0, y: 30 }"
           :enter="{ opacity: 1, y: 0, transition: { duration: 1200, type: 'keyframes', ease: [0.16, 1, 0.3, 1] } }"
         >
-          Farhan Rizki
+          <img src="/pageweb/logosaya.png" alt="Farhan Rizki Logo" class="h-[28px] lg:h-[28px] w-auto object-contain" />
         </NuxtLink>
         <div class="flex items-center gap-4">
           <!-- Desktop Nav -->
@@ -39,9 +39,6 @@ watch(isMenuOpen, (val) => {
             <NuxtLink to="/works" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors" active-class="text-gray-900 font-medium">Work</NuxtLink>
             <NuxtLink to="/about" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors" active-class="text-gray-900 font-medium">About</NuxtLink>
             <NuxtLink to="/contact" class="text-[13.5px] text-gray-600 hover:text-gray-900 transition-colors" active-class="text-gray-900 font-medium">Contact</NuxtLink>
-            <NuxtLink to="/login" class="px-5 py-2 rounded-full text-[13px] font-medium bg-gray-50 border border-gray-100 text-gray-700 hover:bg-gray-100 transition-colors ml-4 shadow-sm">
-              Admin Login
-            </NuxtLink>
           </div>
 
           <!-- Mobile Hamburger -->
@@ -84,7 +81,7 @@ watch(isMenuOpen, (val) => {
           <div class="relative bg-white shadow-2xl pb-12 border-b border-gray-100 flex flex-col h-fit">
             <!-- Menu Spacer for Header -->
             <div class="h-24 shrink-0 px-4 flex items-center">
-               <span class="text-lg tracking-tight text-gray-900 font-normal">Farhan Rizki</span>
+               <img src="/pageweb/logosaya.png" alt="Farhan Rizki Logo" class="h-10 w-auto object-contain" />
             </div>
 
             <!-- Menu Links -->

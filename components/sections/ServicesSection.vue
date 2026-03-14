@@ -42,7 +42,7 @@
         <div class="grid grid-cols-3 gap-2 md:gap-4 relative z-10 mb-6 flex-1 bg-transparent group-hover:brightness-[0.4] transition-all duration-500">
           <img src="/pageweb/laptop.jpg" alt="Workspace 1" class="rounded-[1rem] md:rounded-[1.5rem] w-full h-[120px] sm:h-[180px] md:h-[400px] object-cover shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-100" />
           <div class="bg-[#2B2B2B] rounded-[1rem] md:rounded-[1.5rem] w-full h-[120px] sm:h-[180px] md:h-[400px] overflow-hidden shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-200">
-             <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=600&auto=format&fit=crop" alt="Workspace 2" class="w-full h-full object-cover opacity-80" />
+             <img src="/pageweb/mock.png" alt="Workspace 2" class="w-full h-full object-cover opacity-80" />
           </div>
           <img src="/pageweb/presentasi.jpeg" alt="Workspace 3" class="rounded-[1rem] md:rounded-[1.5rem] w-full h-[120px] sm:h-[180px] md:h-[400px] object-cover shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-300" />
         </div>
