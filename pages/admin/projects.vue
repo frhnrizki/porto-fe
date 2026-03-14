@@ -281,11 +281,11 @@ const openEditModal = (project: any) => {
 
 const handleGalleryUpload = (e: any) => {
   const files = Array.from(e.target.files) as File[]
-  const MAX_SIZE = 5 * 1024 * 1024 // 5MB
+  const MAX_SIZE = 4 * 1024 * 1024 // 4MB (Vercel limit is 4.5MB)
   
   const oversized = files.filter(f => f.size > MAX_SIZE)
   if (oversized.length > 0) {
-    alert(`The following files are too large (max 5MB):\n${oversized.map(f => f.name).join(', ')}`)
+    alert(`The following files are too large (max 4MB for Vercel compatibility):\n${oversized.map(f => f.name).join(', ')}`)
     if (galleryInput.value) galleryInput.value.value = ''
     return
   }
@@ -310,8 +310,8 @@ const removeNewGalleryImage = (index: number) => {
 
 const handleFileUpload = (e: any) => {
   const file = e.target.files[0]
-  if (file && file.size > 5 * 1024 * 1024) {
-    alert('Main thumbnail must be less than 5MB')
+  if (file && file.size > 4 * 1024 * 1024) {
+    alert('Main thumbnail must be less than 4MB (Vercel limit)')
     e.target.value = ''
     return
   }
@@ -396,7 +396,12 @@ const saveProject = async () => {
     showModal.value = false
     refresh()
   } catch (err: any) {
-    alert(err.message || 'Failed to save project')
+    console.error('Save project error:', err)
+    if (err.message?.includes('Failed to fetch')) {
+      alert('Upload failed: The file might be too large (>4MB) or the server took too long to respond. Try using a smaller/compressed image.')
+    } else {
+      alert(err.message || 'Failed to save project')
+    }
   } finally {
     saving.value = false
   }
