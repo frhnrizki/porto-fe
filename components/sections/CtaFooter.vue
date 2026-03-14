@@ -12,7 +12,7 @@
           <span class="text-white">together.</span>
         </h2>
 
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=farhanrizki475@gmail.com" target="_blank" class="inline-flex items-center justify-center px-6 py-3.5 text-[15px] font-medium rounded-[14px] text-black bg-white hover:bg-gray-100 transition-colors shadow-sm">
+        <a href="mailto:farhanrizki475@gmail.com" class="inline-flex items-center justify-center px-6 py-3.5 text-[15px] font-medium rounded-[14px] text-black bg-white hover:bg-gray-100 transition-colors shadow-sm">
           Let's Collaborate
         </a>
       </div>
@@ -35,7 +35,7 @@
 
     <!-- Middle Section: Email -->
     <div class="max-w-7xl mx-auto w-full flex justify-center items-center mt-32 mb-16">
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=farhanrizki475@gmail.com" target="_blank" class="text-gray-300 hover:text-white transition-colors text-[20px] md:text-[24px] tracking-tight">
+      <a href="mailto:farhanrizki475@gmail.com" class="text-gray-300 hover:text-white transition-colors text-[20px] md:text-[24px] tracking-tight">
         farhanrizki475@gmail.com
       </a>
     </div>
