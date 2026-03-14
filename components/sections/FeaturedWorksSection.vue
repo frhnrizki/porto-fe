@@ -19,7 +19,7 @@
       </NuxtLink>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div v-if="projects && projects.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <NuxtLink v-for="(project, index) in projects" 
            :key="project.id" 
            :to="`/works/${project.id}`"
@@ -40,6 +40,11 @@
           <h3 class="text-white text-2xl font-bold">{{ project.title }}</h3>
         </div>
       </NuxtLink>
+    </div>
+
+    <!-- Empty State -->
+    <div v-else class="py-20 text-center rounded-[32px] bg-gray-50 border-2 border-dashed border-gray-100">
+      <p class="text-gray-400 font-medium">Coming soon — New projects are on the way!</p>
     </div>
   </section>
 </template>

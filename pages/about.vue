@@ -280,28 +280,8 @@ const fetchData = async () => {
     // Filter approved testimonials
     testimonials.value = (testiData || []).filter((t: any) => t.status === 'approved')
     
-    // Fallback if empty
-    if (testimonials.value.length === 0) {
-      testimonials.value = [
-        { id: '1', name: 'Darhan Al Farobi', role: 'Support Lead at Google', message: 'Farhan has an incredible eye for detail. His ability to translate complex requirements into simple, beautiful interfaces is second to none.', avatar_url: '' },
-        { id: '2', name: 'Rendra Kurniawansyah', role: 'CTO at Digitec', message: 'Working with Farhan was a breeze. He took ownership of the project and delivered results that exceeded our expectations.', avatar_url: '' }
-      ]
-    }
-    
-    experiences.value = expData || [
-      { id: '1', role: 'UX/UI Designer Freelance', company: 'Digital Creative Agency (Self-Employed)', date_range: '2023 - Present' },
-      { id: '2', role: 'UX/UI Designer', company: 'Pintek (PT. Pintek)', date_range: '2021 - 2022' },
-      { id: '3', role: 'UI/UX Designer', company: 'Inovasi', date_range: '2020 - 2021' }
-    ]
-    
-    stacks.value = stackData || [
-      { id: '1', name: 'Figma', caption: 'Where my creative ideas come to life.', icon_url: '', category: 'Design' },
-      { id: '2', name: 'Vue.js', caption: 'Building interactive and reactive web apps.', icon_url: '', category: 'Code' },
-      { id: '3', name: 'Nuxt.js', caption: 'The power of Vue with server-side rendering.', icon_url: '', category: 'Code' },
-      { id: '4', name: 'Tailwind CSS', caption: 'Rapidly building modern websites without leaving HTML.', icon_url: '', category: 'Design' },
-      { id: '5', name: 'NestJS', caption: 'Structured and scalable backend architecture.', icon_url: '', category: 'Code' },
-      { id: '6', name: 'Supabase', caption: 'The open source Firebase alternative.', icon_url: '', category: 'Tools' }
-    ]
+    experiences.value = expData || []
+    stacks.value = stackData || []
   } catch (err) {
     console.error('Failed to load about data', err)
   }

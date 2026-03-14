@@ -12,8 +12,12 @@
         </div>
 
         <!-- Carousel Container -->
-        <div class="relative flex-1 flex flex-col">
+        <div class="relative flex-1 flex flex-col justify-center">
+          <div v-if="!testimonials || testimonials.length === 0" class="text-center">
+             <p class="text-gray-500 italic">No testimonials yet. Be the first to leave one!</p>
+          </div>
           <TransitionGroup
+            v-else
             enter-active-class="transition-all duration-700 ease-in-out"
             enter-from-class="opacity-0 translate-x-12"
             enter-to-class="opacity-100 translate-x-0"

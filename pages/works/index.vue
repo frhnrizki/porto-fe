@@ -132,71 +132,6 @@ interface Project {
   bgColor?: string
 }
 
-// Fallback static projects (match the design screenshot style)
-const staticProjects: Project[] = [
-  {
-    id: 's1',
-    title: 'FMC Dashboard Telkomsel',
-    tags: ['Web Dashboard'],
-    imageUrl: '',
-    link: '#',
-    bgColor: '#111111',
-  },
-  {
-    id: 's2',
-    title: 'Myoscope',
-    tags: ['Healthcare App', 'AI-Based', 'Heart Attack Detection'],
-    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop',
-    link: '#',
-  },
-  {
-    id: 's3',
-    title: 'TumbuhKita',
-    tags: ['Healthcare', 'Website'],
-    imageUrl: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=800&auto=format&fit=crop',
-    link: '#',
-  },
-  {
-    id: 's4',
-    title: 'Self-Ordering Apps',
-    tags: ['E-Commerce (Self-Ordering)', 'Mobile Design'],
-    imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop',
-    link: '#',
-    bgColor: '#111111',
-  },
-  {
-    id: 's5',
-    title: 'Football Landing Page',
-    tags: ['Landing Page', 'Web Design'],
-    imageUrl: '',
-    link: '#',
-    bgColor: '#1a3fcf',
-  },
-  {
-    id: 's6',
-    title: 'Game-Based Learning Platform – Landing Page',
-    tags: ['Landing Page'],
-    imageUrl: '',
-    link: '#',
-    bgColor: '#2d1b69',
-  },
-  {
-    id: 's7',
-    title: 'The Riv...',
-    tags: ['Residence Landing Page'],
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
-    link: '#',
-  },
-  {
-    id: 's8',
-    title: 'Mail Management System',
-    tags: ['Mail Management System', 'Web Design'],
-    imageUrl: '',
-    link: '#',
-    bgColor: '#5b21b6',
-  },
-]
-
 const $api = useApi()
 const loading = ref(true)
 const apiProjects = ref<Project[]>([])
@@ -230,9 +165,7 @@ const fetchProjects = async () => {
   }
 }
 
-const displayProjects = computed<Project[]>(() =>
-  apiProjects.value.length > 0 ? apiProjects.value : staticProjects,
-)
+const displayProjects = computed<Project[]>(() => apiProjects.value)
 
 onMounted(async () => {
   await fetchProjects()

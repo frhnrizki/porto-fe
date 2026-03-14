@@ -8,7 +8,7 @@
     />
     
     <FeaturedWorksSection 
-      :projects="apiProjects.length > 0 ? apiProjects : portfolioData.projects" 
+      :projects="apiProjects" 
     />
     
     <CompanyLogosSection 
@@ -16,7 +16,7 @@
     />
     
     <TestimonialsSection 
-      :testimonials="apiTestimonials.length > 0 ? apiTestimonials : portfolioData.testimonials" 
+      :testimonials="apiTestimonials" 
     />
     
     <TestimonialFormSection @success="fetchTestimonials" />
