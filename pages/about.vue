@@ -1,9 +1,9 @@
 <template>
   <div class="min-h-screen bg-white">
     <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-16 pb-16">
+    <section class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-12 pt-16 pb-16">
       <h1 
-        class="text-[2.2rem] sm:text-[3rem] lg:text-[2.6rem] font-medium tracking-tight leading-[1.1] max-w-[900px] mx-auto text-center lg:text-left lg:mx-0 mb-20"
+        class="text-[1.8rem] sm:text-[3rem] lg:text-[2.6rem] font-medium tracking-tight leading-[1.15] max-w-[900px] mx-auto text-start lg:text-left lg:mx-0 mb-12 lg:mb-20"
         v-motion
         :initial="{ opacity: 0, y: 30 }"
         :enter="{ opacity: 1, y: 0, transition: { duration: 900, ease: [0.16, 1, 0.3, 1] } }"
@@ -12,12 +12,18 @@
         <span class="text-gray-900 font-medium">and </span>
         <span class="text-gray-900 font-bold">clarity </span>
         <span class="text-gray-500">to deliver </span>
-        <span class="text-gray-900 font-medium whitespace-nowrap">real impact and engagement.</span>
+        <span class="text-gray-900 font-medium">real impact and engagement.</span>
       </h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-[40fr_60fr] gap-6 lg:gap-8 items-stretch">
+        <!-- Featured Image Card -->
+        <div class="rounded-[2.5rem] overflow-hidden h-[400px] lg:h-[550px] order-1 lg:order-2">
+          <img src="/pageweb/siluet.png" alt="Featured Portrait" class="w-full h-full object-cover" />
+        </div>
+
+        <!-- Testimonials -->
         <div 
-          class="relative h-[550px] overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 p-5 group"
+          class="relative h-[480px] lg:h-[550px] overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 p-4 lg:p-5 group order-2 lg:order-1"
           @mouseenter="pauseScroll = true"
           @mouseleave="pauseScroll = false"
         >
@@ -29,16 +35,16 @@
             <div 
               v-for="feedback in [...testimonials, ...testimonials]" 
               :key="feedback.id + '-' + Math.random()"
-              class="p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm"
+              class="p-6 lg:p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm"
             >
               <div class="flex items-center gap-4 mb-6">
-                <img :src="feedback.avatar_url || 'https://ui-avatars.com/api/?name=' + feedback.name" :alt="feedback.name" class="w-11 h-11 rounded-lg object-cover" />
+                <img :src="feedback.avatar_url || 'https://ui-avatars.com/api/?name=' + feedback.name" :alt="feedback.name" class="w-12 h-12 rounded-full object-cover shadow-sm" />
                 <div>
                   <h4 class="text-[15px] font-semibold text-gray-900 leading-tight">{{ feedback.name }}</h4>
                   <p class="text-[13px] text-gray-400 mt-1 font-medium">{{ feedback.role }}</p>
                 </div>
               </div>
-              <p class="text-[15px] text-gray-600 leading-[1.65] font-normal">{{ feedback.message }}</p>
+              <p class="text-[14px] lg:text-[15px] text-gray-600 leading-[1.65] font-normal">{{ feedback.message }}</p>
             </div>
           </div>
           
@@ -46,23 +52,18 @@
           <div class="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-gray-50 to-transparent pointer-events-none z-10"></div>
           <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none z-10"></div>
         </div>
-
-        <!-- Featured Image Card -->
-        <div class="rounded-[2.5rem] overflow-hidden h-[550px]">
-          <img src="/pageweb/siluet.png" alt="Featured Portrait" class="w-full h-full object-cover" />
-        </div>
       </div>
     </section>
 
     <!-- Detailed About Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-24 border-t border-gray-100">
-      <div class="grid grid-cols-1 lg:grid-cols-[430px_1fr] gap-x-16 gap-y-20 lg:gap-y-14">
+    <section class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-12 py-20 lg:py-24 border-t border-gray-100">
+      <div class="grid grid-cols-1 lg:grid-cols-[430px_1fr] gap-x-16 gap-y-8 lg:gap-y-14">
         <div class="text-[16px] text-gray-500 font-medium pt-1">About Me</div>
         <div class="flex flex-col gap-8">
           <h2 class="text-[32px] sm:text-[36px] font-medium text-gray-900 leading-tight lg:max-w-4xl">
             I design intuitive and impactful user experiences that balance clarity, usability, and visual appeal.
           </h2>
-          <div class="space-y-6 text-[16px] text-gray-600 leading-[1.8] lg:pr-22">
+          <div class="space-y-6 text-[16px] text-gray-600 leading-[1.5] lg:pr-22">
             <p>
               As a UI/UX designer, my focus is on creating clean interfaces and smooth user journeys that solve real user problems while aligning with business goals. From designing responsive dashboards and mobile apps to refining web experiences, I bring a user-centered approach to every project I work on.
             </p>
@@ -73,18 +74,20 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-[62fr_38fr] gap-8 mt-24 items-stretch">
-        <div class="rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-[4/3] lg:aspect-auto h-[400px] lg:h-[500px]">
-           <img src="/pageweb/residence.png" class="w-full h-full object-cover" />
+      <div class="grid grid-cols-1 lg:grid-cols-[62fr_38fr] gap-6 lg:gap-8 mt-24 items-stretch">
+        <!-- Project/Architectural Preview with Sage Background -->
+        <div class="rounded-[3rem] overflow-hidden bg-[#C9D1B7] p-8 lg:p-12 flex items-center justify-center min-h-[350px] lg:h-[500px]">
+           <img src="/pageweb/residence.png" class="w-full h-auto max-h-full object-contain rounded-2xl shadow-2xl" />
         </div>
-        <div class="rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-[3/4] lg:aspect-auto h-[400px] lg:h-[500px]">
+        <!-- Portrait Photo -->
+        <div class="rounded-[3rem] overflow-hidden bg-gray-100 h-[450px] lg:h-[500px]">
            <img src="/pageweb/laptop.jpeg" class="w-full h-full object-cover" />
         </div>
       </div>
     </section>
 
     <!-- Work Experience Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-24 border-t border-gray-100">
+    <section class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-12 py-20 lg:py-24 border-t border-gray-100">
       <h2 class="text-4xl font-medium text-gray-900 mb-12">Work experiences</h2>
       <div class="space-y-4">
         <div 
@@ -99,7 +102,7 @@
       </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-24 border-t border-gray-100">
+    <section class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-12 py-20 lg:py-24 border-t border-gray-100">
       <h2 class="text-4xl font-medium text-gray-900 mb-12">My stacks</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div 
@@ -128,11 +131,11 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-24 border-t border-gray-100">
+    <section class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-12 py-20 lg:py-24 border-t border-gray-100">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
         <div>
           <span class="text-sm font-medium text-gray-500">FAQs</span>
-          <h2 class="text-4xl font-medium text-gray-500 mt-4 leading-tight">
+          <h2 class="text-3xl font-medium text-gray-500 mt-4 leading-tight">
             Answers to common questions to help you understand <span class="text-gray-900 font-bold">the process</span> and how we can work together
           </h2>
           <div class="mt-8">
@@ -158,22 +161,20 @@
                 class="w-full flex items-center justify-between p-6 text-left"
               >
                 <span class="text-[17px] font-semibold text-gray-900 leading-tight pr-6">{{ faq.question }}</span>
-                <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center text-gray-400">
-                  <svg v-if="activeFaq === idx" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                  <svg v-else xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center text-gray-400 transform transition-transform duration-300" :class="{ 'rotate-45': activeFaq === idx }">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
                 </div>
               </button>
               <div 
-                v-if="activeFaq === idx"
-                class="px-6 pb-6 text-[15px] text-[#717171] leading-relaxed"
+                class="overflow-hidden transition-all duration-300 ease-in-out" 
+                :class="activeFaq === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
               >
-                {{ faq.answer }}
+                <div class="px-6 pb-6 text-[15px] text-[#717171] leading-relaxed">
+                  {{ faq.answer }}
+                </div>
               </div>
             </div>
           </div>

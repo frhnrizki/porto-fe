@@ -32,19 +32,19 @@
       </div>
 
       <!-- Main Content Area -->
-      <div class="bg-[#A435F0] group-hover:bg-[#3B1F60] transition-colors duration-500 rounded-[1.5rem] p-4 md:p-4 flex flex-col flex-1">
+      <div class="bg-[#A435F0] group-hover:bg-[#3B1F60] transition-colors duration-500 rounded-[1.5rem] p-4 flex flex-col flex-1">
         <!-- Card Description -->
         <p class="text-[13px] md:text-[15px] font-normal text-white group-hover:text-white/40 transition-colors duration-500 leading-relaxed mb-6 lg:max-w-[95%]">
           Designing user-centered experiences that are both functional and visually engaging. From concept to final prototype, I focus on intuitive interfaces that drive engagement and enhance usability
         </p>
 
-        <!-- Gallery Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-10 mb-6 flex-1 bg-transparent group-hover:brightness-[0.4] transition-all duration-500">
-          <img src="/pageweb/laptop.jpg" alt="Workspace 1" class="rounded-[1.5rem] w-full h-[250px] md:h-[400px] object-cover shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-100" />
-          <div class="bg-[#2B2B2B] rounded-[1.5rem] w-full h-[250px] md:h-[400px] overflow-hidden shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-200">
+        <!-- Gallery Grid - always 3 columns -->
+        <div class="grid grid-cols-3 gap-2 md:gap-4 relative z-10 mb-6 flex-1 bg-transparent group-hover:brightness-[0.4] transition-all duration-500">
+          <img src="/pageweb/laptop.jpg" alt="Workspace 1" class="rounded-[1rem] md:rounded-[1.5rem] w-full h-[120px] sm:h-[180px] md:h-[400px] object-cover shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-100" />
+          <div class="bg-[#2B2B2B] rounded-[1rem] md:rounded-[1.5rem] w-full h-[120px] sm:h-[180px] md:h-[400px] overflow-hidden shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-200">
              <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=600&auto=format&fit=crop" alt="Workspace 2" class="w-full h-full object-cover opacity-80" />
           </div>
-          <img src="/pageweb/presentasi.jpeg" alt="Workspace 3" class="rounded-[1.5rem] w-full h-[250px] md:h-[400px] object-cover shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-300" />
+          <img src="/pageweb/presentasi.jpeg" alt="Workspace 3" class="rounded-[1rem] md:rounded-[1.5rem] w-full h-[120px] sm:h-[180px] md:h-[400px] object-cover shadow-sm group-hover:-translate-y-1 transition-transform duration-500 delay-300" />
         </div>
 
         <!-- Pill Tags -->
