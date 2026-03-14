@@ -138,18 +138,47 @@
                   </div>
                 </div>
 
-                <!-- Gallery URLs -->
+                <!-- Gallery Management -->
                 <div>
-                  <div class="flex justify-between items-center mb-2">
-                    <label class="block text-sm font-medium text-gray-700">Gallery Image URLs</label>
-                    <button type="button" @click="addGalleryUrl" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">+ Add URL</button>
+                  <div class="flex justify-between items-center mb-3">
+                    <label class="block text-sm font-medium text-gray-700">Gallery Images</label>
+                    <button type="button" @click="galleryInput?.click()" class="text-xs px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-md hover:bg-indigo-100 font-semibold transition-colors">
+                      + Add Images
+                    </button>
+                    <input 
+                      ref="galleryInput" 
+                      type="file" 
+                      multiple 
+                      accept="image/*" 
+                      class="hidden" 
+                      @change="handleGalleryUpload"
+                    >
                   </div>
-                  <div class="space-y-2">
-                    <div v-for="(url, index) in form.gallery_urls" :key="index" class="flex gap-2">
-                      <input v-model="form.gallery_urls[index]" type="text" placeholder="https://image-url.com" class="block w-full border border-gray-300 rounded-md shadow-sm p-2 text-sm focus:ring-indigo-500 focus:border-indigo-500">
-                      <button type="button" @click="removeGalleryUrl(index)" class="p-2 text-red-500 hover:bg-red-50 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2 2H3"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                  
+                  <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    <!-- Existing Gallery Images -->
+                    <div v-for="(url, index) in form.gallery_urls" :key="'existing-' + index" class="relative group aspect-square rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
+                      <img :src="url" class="w-full h-full object-cover" />
+                      <button @click="removeExistingGalleryImage(index)" type="button" class="absolute top-1 right-1 p-1 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                       </button>
+                    </div>
+
+                    <!-- New Upload Previews -->
+                    <div v-for="(file, index) in newGalleryImages" :key="'new-' + index" class="relative group aspect-square rounded-lg overflow-hidden border border-indigo-200 bg-indigo-50">
+                      <img :src="file.preview" class="w-full h-full object-cover" />
+                      <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                         <button @click="removeNewGalleryImage(index)" type="button" class="p-1.5 bg-red-500 text-white rounded-full shadow-lg">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                         </button>
+                      </div>
+                      <div class="absolute bottom-0 left-0 right-0 py-0.5 bg-indigo-600 text-[8px] text-white text-center font-bold uppercase tracking-tighter">New</div>
+                    </div>
+
+                    <!-- Empty State / Placeholder -->
+                    <div v-if="form.gallery_urls.length === 0 && newGalleryImages.length === 0" class="col-span-full py-8 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center text-gray-400">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                      <span class="text-xs">No images in gallery</span>
                     </div>
                   </div>
                 </div>
@@ -187,6 +216,13 @@ const showModal = ref(false)
 const saving = ref(false)
 const editingId = ref<string | null>(null)
 const fileInput = ref<File | null>(null)
+const galleryInput = ref<HTMLInputElement | null>(null)
+
+interface GalleryFile {
+  file: File
+  preview: string
+}
+const newGalleryImages = ref<GalleryFile[]>([])
 
 const form = reactive({
   title: '',
@@ -218,6 +254,7 @@ const openCreateModal = () => {
     gallery_urls: []
   })
   fileInput.value = null
+  newGalleryImages.value = []
   showModal.value = true
 }
 
@@ -237,15 +274,29 @@ const openEditModal = (project: any) => {
     gallery_urls: Array.isArray(project.gallery_urls) ? [...project.gallery_urls] : []
   })
   fileInput.value = null
+  newGalleryImages.value = []
   showModal.value = true
 }
 
-const addGalleryUrl = () => {
-  form.gallery_urls.push('')
+const handleGalleryUpload = (e: any) => {
+  const files = Array.from(e.target.files) as File[]
+  files.forEach(file => {
+    newGalleryImages.value.push({
+      file,
+      preview: URL.createObjectURL(file)
+    })
+  })
+  // Reset input value so same file can be selected again if removed
+  if (galleryInput.value) galleryInput.value.value = ''
 }
 
-const removeGalleryUrl = (index: number) => {
+const removeExistingGalleryImage = (index: number) => {
   form.gallery_urls.splice(index, 1)
+}
+
+const removeNewGalleryImage = (index: number) => {
+  const removed = newGalleryImages.value.splice(index, 1)[0]
+  URL.revokeObjectURL(removed.preview)
 }
 
 const handleFileUpload = (e: any) => {
@@ -257,7 +308,7 @@ const saveProject = async () => {
   try {
     let finalImageUrl = form.image_url
 
-    // 1. Upload file if exists
+    // 1. Upload thumbnail if exists
     if (fileInput.value) {
       const formData = new FormData()
       formData.append('file', fileInput.value)
@@ -267,6 +318,23 @@ const saveProject = async () => {
         body: formData
       })
       finalImageUrl = uploadRes.url
+    }
+
+    // 2. Upload new gallery images
+    const uploadedGalleryUrls = [...form.gallery_urls]
+    if (newGalleryImages.value.length > 0) {
+      const uploadPromises = newGalleryImages.value.map(async (item) => {
+        const formData = new FormData()
+        formData.append('file', item.file)
+        const res: any = await $api('/projects/upload', {
+          method: 'POST',
+          body: formData
+        })
+        return res.url
+      })
+      
+      const newUrls = await Promise.all(uploadPromises)
+      uploadedGalleryUrls.push(...newUrls)
     }
 
     // Sanitize payload: convert empty strings to null for DB consistency
@@ -289,13 +357,10 @@ const saveProject = async () => {
       project_url: sanitize(form.project_url),
       status: form.status,
       image_url: finalImageUrl || null,
-      gallery_urls: form.gallery_urls.filter(url => url && typeof url === 'string' && url.trim() !== '')
+      gallery_urls: uploadedGalleryUrls
     }
 
-    console.log('DEBUG - Form Data:', JSON.parse(JSON.stringify(form)))
-    console.log('DEBUG - Final Payload:', payload)
-
-    // 2. Save Project (Update or Create)
+    // 3. Save Project (Update or Create)
     if (editingId.value) {
       await $api(`/projects/${editingId.value}`, {
         method: 'PATCH',
@@ -308,6 +373,9 @@ const saveProject = async () => {
       })
     }
 
+    // Cleanup previews
+    newGalleryImages.value.forEach(item => URL.revokeObjectURL(item.preview))
+    
     showModal.value = false
     refresh()
   } catch (err: any) {

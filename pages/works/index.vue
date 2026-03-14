@@ -30,7 +30,7 @@
           v-for="(project, index) in displayProjects"
           :key="project.id"
           :to="`/works/${project.id}`"
-          class="group relative rounded-3xl overflow-hidden aspect-[4/3] block cursor-pointer"
+          class="group relative rounded-[32px] overflow-hidden aspect-[4/3] block cursor-pointer"
           v-motion
           :initial="{ opacity: 0, y: 50 }"
           :visibleOnce="{

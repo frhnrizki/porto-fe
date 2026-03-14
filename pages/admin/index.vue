@@ -39,6 +39,17 @@
           <svg class="h-8 w-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
       </div>
+
+       <!-- Total Messages -->
+      <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex items-center justify-between cursor-pointer hover:shadow-md transition" @click="$router.push('/admin/contacts')">
+        <div>
+          <p class="text-sm font-medium text-gray-500">Total Messages</p>
+          <p class="text-3xl font-bold text-blue-600 mt-2">{{ metrics.totalMessages }}</p>
+        </div>
+        <div class="p-3 bg-blue-50 rounded-full">
+          <svg class="h-8 w-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -50,7 +61,14 @@ definePageMeta({
 
 const $api = useApi()
 
-const { data: metrics, pending } = useAsyncData('dashboard-metrics', 
+interface DashboardMetrics {
+  totalProjects: number
+  totalTestimonials: number
+  pendingTestimonials: number
+  totalMessages: number
+}
+
+const { data: metrics, pending } = useAsyncData<DashboardMetrics>('dashboard-metrics', 
   () => $api('/dashboard/metrics')
 )
 </script>

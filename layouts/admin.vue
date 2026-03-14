@@ -26,6 +26,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.1 6.02a2 2 0 0 0 0 3.66l9.07 3.84a2 2 0 0 0 1.66 0l9.07-3.84a2 2 0 0 0 0-3.66z"/><path d="m2.1 11.84 9.07 3.84a2 2 0 0 0 1.66 0l9.07-3.84"/><path d="m2.1 16.16 9.07 3.84a2 2 0 0 0 1.66 0l9.07-3.84"/></svg>
           Stacks
         </NuxtLink>
+        <NuxtLink to="/admin/contacts" class="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-gray-200 transition text-gray-700 font-medium" active-class="bg-gray-200 text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Messages
+        </NuxtLink>
       </nav>
       <div class="p-4 border-t border-gray-200">
         <button @click="logout" class="w-full text-left px-4 py-2 hover:bg-red-50 hover:text-red-600 focus:text-red-600 rounded-md transition flex items-center group">

@@ -17,13 +17,13 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-[40fr_60fr] gap-6 lg:gap-8 items-stretch">
         <div 
-          class="relative h-[550px] overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 p-8 group"
+          class="relative h-[550px] overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 p-5 group"
           @mouseenter="pauseScroll = true"
           @mouseleave="pauseScroll = false"
         >
           <div 
             ref="scrollContainer"
-            class="space-y-6 transition-transform duration-1000 ease-linear"
+            class="space-y-3 transition-transform duration-1000 ease-linear"
             :style="{ transform: `translateY(-${scrollOffset}px)` }"
           >
             <div 
@@ -73,12 +73,12 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-24">
-        <div class="rounded-3xl overflow-hidden aspect-[4/3] bg-gray-100">
-           <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" />
+      <div class="grid grid-cols-1 lg:grid-cols-[62fr_38fr] gap-8 mt-24 items-stretch">
+        <div class="rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-[4/3] lg:aspect-auto h-[400px] lg:h-[500px]">
+           <img src="/pageweb/residence.png" class="w-full h-full object-cover" />
         </div>
-        <div class="rounded-3xl overflow-hidden aspect-[4/3] bg-gray-100">
-           <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" />
+        <div class="rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-[3/4] lg:aspect-auto h-[400px] lg:h-[500px]">
+           <img src="/pageweb/laptop.jpeg" class="w-full h-full object-cover" />
         </div>
       </div>
     </section>

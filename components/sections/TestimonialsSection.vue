@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 object-contain">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-24 object-contain">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 items-center justify-center h-full mx-auto">
       
       <!-- Left Card: Testimonials Carousel -->
