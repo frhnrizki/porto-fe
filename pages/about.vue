@@ -139,7 +139,7 @@
             Answers to common questions to help you understand <span class="text-gray-900 font-bold">the process</span> and how we can work together
           </h2>
           <div class="mt-8">
-            <a :href="getEmailLink()" target="_blank" class="inline-flex px-8 py-3 bg-[#111111] text-white rounded-[14px] text-sm font-medium hover:bg-gray-800 transition-all shadow-md">
+            <a href="mailto:farhanrizki475@gmail.com" class="inline-flex px-8 py-3 bg-[#111111] text-white rounded-[14px] text-sm font-medium hover:bg-gray-800 transition-all shadow-md">
               Let's Talk
             </a>
           </div>
@@ -191,8 +191,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import CtaFooter from '~/components/sections/CtaFooter.vue'
 import { useApi } from '~/composables/useApi'
-
-const { getEmailLink } = useEmail()
 
 definePageMeta({
   layout: 'portfolio',
