@@ -21,6 +21,8 @@
     
     <TestimonialFormSection @success="fetchTestimonials" />
     
+    <SpotifySection />
+    
     <ServicesSection />
     
     <WorkflowSection />
@@ -42,6 +44,7 @@ import FeaturedWorksSection from '~/components/sections/FeaturedWorksSection.vue
 import CompanyLogosSection from '~/components/sections/CompanyLogosSection.vue'
 import TestimonialsSection from '~/components/sections/TestimonialsSection.vue'
 import TestimonialFormSection from '~/components/sections/TestimonialFormSection.vue'
+import SpotifySection from '~/components/sections/SpotifySection.vue'
 import ServicesSection from '~/components/sections/ServicesSection.vue'
 import WorkflowSection from '~/components/sections/WorkflowSection.vue'
 import FaqSection from '~/components/sections/FaqSection.vue'

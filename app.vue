@@ -1,4 +1,5 @@
 <template>
+  <CursorBlur />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
