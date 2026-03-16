@@ -27,7 +27,7 @@
       </p>
 
       <!-- CTA -->
-      <a href="mailto:farhanrizki475@gmail.com" class="inline-flex items-center justify-center px-7 py-3 text-sm font-medium rounded-[14px] text-white bg-[#111111] hover:bg-[#9520D4] transition-all shadow-lg w-fit mb-8">
+      <a :href="getEmailLink()" target="_blank" class="inline-flex items-center justify-center px-7 py-3 text-sm font-medium rounded-[14px] text-white bg-[#111111] hover:bg-[#9520D4] transition-all shadow-lg w-fit mb-8">
         Email Me
       </a>
 
@@ -89,7 +89,7 @@
             >
               Farhan is a Junior Developer and UI/UX Designer passionate about creating clean and user-friendly interfaces. Currently learning Nuxt.js and modern web technologies, he enjoys building real projects to improve his skills and grow as a developer.
             </p>
-            <a href="mailto:farhanrizki475@gmail.com" class="inline-flex items-center justify-center px-7 py-3 text-sm font-medium border border-transparent rounded-[14px] text-white bg-[#111111] hover:bg-[#9520D4] transition-all shadow-lg hover:-translate-y-0.5 transform duration-500 ease-out mb-10"
+            <a :href="getEmailLink()" target="_blank" class="inline-flex items-center justify-center px-7 py-3 text-sm font-medium border border-transparent rounded-[14px] text-white bg-[#111111] hover:bg-[#9520D4] transition-all shadow-lg hover:-translate-y-0.5 transform duration-500 ease-out mb-10"
               v-motion
               :initial="{ opacity: 0, y: 30 }"
               :enter="{ opacity: 1, y: 0, transition: { duration: 1200, type: 'keyframes', ease: [0.16, 1, 0.3, 1], delay: 400 } }"
@@ -104,6 +104,8 @@
 </template>
 
 <script setup lang="ts">
+const { getEmailLink } = useEmail()
+
 defineProps<{
   name: string
   headline: string
