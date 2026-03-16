@@ -1,11 +1,16 @@
 <template>
   <section class="max-w-[1536px] w-full mx-auto px-4 lg:px-12 xl:px-10 relative overflow-hidden">
     
-    <!-- Background Silhouette Text -->
-    <div class="absolute inset-0 flex justify-center items-center pointer-events-none z-0 select-none overflow-hidden">
-      <span class="text-[18vw] md:text-[200px] lg:text-[180px] font-black tracking-tighter text-gray-900 leading-none opacity-[0.03] transform lg:-translate-y-20">
-        JUNIORDEVELOPER
-      </span>
+    <!-- Background Silhouette Text (Marquee) -->
+    <div class="absolute inset-0 flex items-end lg:items-center pointer-events-none z-0 select-none overflow-hidden pb-20 lg:pb-0" @mouseenter="heroHovered = true" @mouseleave="heroHovered = false" style="pointer-events: auto">
+      <div ref="heroTrackRef" class="flex whitespace-nowrap lg:-translate-y-[200px] will-change-transform">
+        <span class="text-[18vw] md:text-[200px] lg:text-[180px] font-black tracking-tighter text-gray-900 leading-none opacity-[0.03] px-4">
+          JUNIORDEVELOPER
+        </span>
+        <span class="text-[18vw] md:text-[200px] lg:text-[180px] font-black tracking-tighter text-gray-900 leading-none opacity-[0.03] px-4">
+          JUNIORDEVELOPER
+        </span>
+      </div>
     </div>
 
     <!-- === MOBILE LAYOUT (hidden on lg+) === -->
@@ -104,6 +109,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const { openEmail } = useEmail()
 
 defineProps<{
@@ -112,4 +119,34 @@ defineProps<{
   availability: string
   photoUrl: string 
 }>()
+
+const heroTrackRef = ref<HTMLElement | null>(null)
+const heroHovered = ref(false)
+
+const normalSpeed = 0.8
+const hoverSpeed = 0.2
+let currentSpeed = normalSpeed
+let offset = 0
+let rafId = 0
+
+const animate = () => {
+  const targetSpeed = heroHovered.value ? hoverSpeed : normalSpeed
+  currentSpeed += (targetSpeed - currentSpeed) * 0.05
+
+  offset += currentSpeed
+  if (heroTrackRef.value) {
+    const halfWidth = heroTrackRef.value.scrollWidth / 2
+    if (offset >= halfWidth) offset -= halfWidth
+    heroTrackRef.value.style.transform = `translateX(-${offset}px)`
+  }
+  rafId = requestAnimationFrame(animate)
+}
+
+onMounted(() => {
+  rafId = requestAnimationFrame(animate)
+})
+
+onUnmounted(() => {
+  cancelAnimationFrame(rafId)
+})
 </script>
