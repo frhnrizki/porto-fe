@@ -55,22 +55,24 @@
         </div>
 
         <!-- Expanded Interface (Iframe Player) -->
-        <div v-if="isExpanded" class="spotify-card__expanded" @click.stop>
-          <div class="iframe-container">
-            <iframe 
-              v-if="song?.songUrl"
-              :src="embedUrl" 
-              width="100%" 
-              height="152" 
-              frameBorder="0" 
-              allowfullscreen="" 
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-              loading="lazy"
-              class="spotify-embed"
-            ></iframe>
-            <div v-else class="no-track-message">
-              <p>Explore my music on Spotify</p>
-              <a href="https://open.spotify.com/user/fp7m4c6e6z1z6k3e6z1z6k3e6" target="_blank" class="spotify-link">View Profile</a>
+        <div class="spotify-card__expanded-wrapper" :class="{ 'is-open': isExpanded }">
+          <div class="spotify-card__expanded" @click.stop>
+            <div class="iframe-container">
+              <iframe 
+                v-if="song?.songUrl"
+                :src="embedUrl" 
+                width="100%" 
+                height="152" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy"
+                class="spotify-embed"
+              ></iframe>
+              <div v-else class="no-track-message">
+                <p>Explore my music on Spotify</p>
+                <a href="https://open.spotify.com/user/fp7m4c6e6z1z6k3e6z1z6k3e6" target="_blank" class="spotify-link">View Profile</a>
+              </div>
             </div>
           </div>
         </div>
@@ -146,45 +148,46 @@ onUnmounted(() => {
 
 <style scoped>
 .spotify-section {
-  padding: 4rem 2rem;
-  display: flex;
-  justify-content: center;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 100;
+  pointer-events: none;
 }
 
 .spotify-section__container {
-  width: 100%;
-  max-width: 1200px;
+  width: auto;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  pointer-events: auto;
 }
 
 /* ── Card Base (Glassmorphism) ── */
 .spotify-card {
   position: relative;
-  width: 100%;
-  max-width: 450px;
-  background: rgba(18, 18, 18, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  width: 260px;
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 28px;
-  padding: 14px;
+  border-radius: 20px;
+  padding: 10px;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
 .spotify-card:hover {
-  transform: translateY(-4px);
-  background: rgba(18, 18, 18, 0.85);
-  border-color: rgba(30, 215, 96, 0.3);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(30, 215, 96, 0.1);
+  transform: translateY(-6px);
+  background: rgba(22, 22, 22, 0.9);
+  border-color: rgba(30, 215, 96, 0.35);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 15px rgba(30, 215, 96, 0.1);
 }
 
 .spotify-card--expanded {
-  max-width: 500px;
-  background: rgba(18, 18, 18, 0.95);
+  width: 320px;
+  background: rgba(12, 12, 12, 0.98);
   border-color: rgba(30, 215, 96, 0.4);
 }
 
@@ -195,7 +198,7 @@ onUnmounted(() => {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center, rgba(30, 215, 96, 0.08) 0%, transparent 40%);
+  background: radial-gradient(circle at center, rgba(30, 215, 96, 0.1) 0%, transparent 50%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -209,22 +212,22 @@ onUnmounted(() => {
 .spotify-card__content {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
   z-index: 1;
 }
 
 /* ── Visual (Artwork/Icon) ── */
 .player-visual {
   position: relative;
-  width: 56px;
-  height: 56px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
 }
 
 .player-visual__img {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
+  border-radius: 10px;
   object-fit: cover;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
@@ -242,8 +245,8 @@ onUnmounted(() => {
 .player-visual__icon {
   width: 100%;
   height: 100%;
-  background: #282828;
-  border-radius: 14px;
+  background: #222;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,27 +254,27 @@ onUnmounted(() => {
 }
 
 .player-visual__icon svg {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
 }
 
 /* ── Equalizer ── */
 .player-visual__eq {
   position: absolute;
-  bottom: -4px;
-  right: -4px;
+  bottom: -2px;
+  right: -2px;
   background: #1DB954;
-  padding: 6px;
-  border-radius: 8px;
+  padding: 3px;
+  border-radius: 4px;
   display: flex;
-  gap: 2px;
-  height: 20px;
+  gap: 1px;
+  height: 14px;
   align-items: flex-end;
-  border: 3px solid #121212;
+  border: 1.5px solid #121212;
 }
 
 .eq-bar {
-  width: 2px;
+  width: 1.5px;
   background: #000;
   border-radius: 1px;
 }
@@ -281,9 +284,9 @@ onUnmounted(() => {
 .eq-bar:nth-child(3) { animation: eq 0.8s 0.4s infinite; }
 
 @keyframes eq {
-  0% { height: 4px; }
-  50% { height: 12px; }
-  100% { height: 4px; }
+  0% { height: 2px; }
+  50% { height: 8px; }
+  100% { height: 2px; }
 }
 
 /* ── Info ── */
@@ -293,28 +296,29 @@ onUnmounted(() => {
 }
 
 .player-info__status {
-  font-size: 10px;
+  font-size: 8px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.6px;
   color: #1DB954;
-  font-weight: 700;
-  margin-bottom: 2px;
+  font-weight: 800;
+  margin-bottom: 0px;
   display: block;
 }
 
 .player-info__title {
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   color: #fff;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .player-info__artist {
-  font-size: 12px;
-  color: #b3b3b3;
+  font-size: 10px;
+  color: #a1a1aa;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -323,16 +327,17 @@ onUnmounted(() => {
 
 /* ── Toggle Button ── */
 .player-toggle {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: none;
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .spotify-card:hover .player-toggle {
@@ -341,48 +346,61 @@ onUnmounted(() => {
   transform: scale(1.1);
 }
 
-/* ── Expanded Content (Iframe) ── */
-.spotify-card__expanded {
-  margin-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 16px;
-  animation: slide-down 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+/* ── Expanded Content (Smooth Animation Trick) ── */
+.spotify-card__expanded-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
 
-@keyframes slide-down {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+.spotify-card__expanded-wrapper.is-open {
+  grid-template-rows: 1fr;
+  margin-top: 12px;
+}
+
+.spotify-card__expanded {
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.is-open .spotify-card__expanded {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 12px;
+  opacity: 1;
 }
 
 .iframe-container {
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   background: #000;
 }
 
 .spotify-embed {
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .no-track-message {
-  padding: 24px;
+  padding: 16px;
   text-align: center;
 }
 
 .no-track-message p {
   color: #b3b3b3;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
 }
 
 .spotify-link {
   display: inline-block;
   background: #1DB954;
   color: #000;
-  padding: 8px 20px;
+  padding: 5px 14px;
   border-radius: 99px;
   font-weight: 700;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 11px;
   transition: transform 0.2s ease;
 }
 
@@ -394,16 +412,16 @@ onUnmounted(() => {
 .skeleton-circle {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
-  background: #282828;
+  border-radius: 10px;
+  background: #222;
   animation: pulse 1.5s infinite;
 }
 
 .skeleton-text {
-  height: 12px;
-  background: #282828;
+  height: 8px;
+  background: #222;
   border-radius: 4px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   animation: pulse 1.5s infinite;
 }
 
@@ -417,8 +435,25 @@ onUnmounted(() => {
 }
 
 @media (max-width: 640px) {
+  .spotify-section {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
   .spotify-card {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 16px;
+  }
+
+  .spotify-card--expanded {
     max-width: 100%;
   }
+
+  .player-info__title { font-size: 11px; }
+  .player-info__artist { font-size: 9px; }
 }
 </style>
