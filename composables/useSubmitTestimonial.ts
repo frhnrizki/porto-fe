@@ -12,15 +12,16 @@ export const useSubmitTestimonial = () => {
         try {
             const apiUrl = `${config.public.apiBase}/testimonials`;
 
-            await $fetch(apiUrl, {
+            const data = await $fetch<any>(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: payload
             });
-
+            
             success.value = true;
+            return data;
         } catch (e: any) {
             error.value = e?.message || 'Failed to submit testimonial. Please try again later.';
             console.error('Testimonial submission error:', e);

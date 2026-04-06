@@ -19,7 +19,7 @@
       :testimonials="apiTestimonials" 
     />
     
-    <TestimonialFormSection @success="fetchTestimonials" />
+    <TestimonialFormSection @success="handleTestimonialSuccess" />
     
     
     <ServicesSection />
@@ -55,9 +55,17 @@ definePageMeta({
 const portfolioData = usePortfolioData()
 const $api = useApi()
 
+interface Testimonial {
+  id: number
+  name: string
+  role: string
+  text: string
+  avatarUrl: string
+}
+
 // Dynamically fetch from backend to mix static + dynamic data smoothly
 const apiProjects = ref([])
-const apiTestimonials = ref([])
+const apiTestimonials = ref<Testimonial[]>([])
 
 const fetchProjects = async () => {
   try {
@@ -92,6 +100,21 @@ const fetchTestimonials = async () => {
   } catch (err) {
     console.error('Failed to load testimonials', err)
   }
+}
+
+const handleTestimonialSuccess = (newTestimonial: any) => {
+  if (!newTestimonial) return
+  
+  const formatted = {
+    id: newTestimonial.id,
+    name: newTestimonial.name,
+    role: `Rating: ${newTestimonial.rating}/5`,
+    text: newTestimonial.message,
+    avatarUrl: `https://i.pravatar.cc/150?u=${newTestimonial.id}`
+  }
+  
+  // Prepend to show immediately at the beginning
+  apiTestimonials.value = [formatted, ...apiTestimonials.value]
 }
 
 onMounted(async () => {

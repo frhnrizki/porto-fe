@@ -152,10 +152,10 @@ const validateForm = () => {
 const handleSubmit = async () => {
   if (!validateForm()) return;
 
-  await submit({ ...formData });
-
+  const res = await submit({ ...formData });
+  
   if (success.value) {
-    emit('success');
+    emit('success', res);
     // Reset form on success
     formData.name = '';
     formData.email = '';
