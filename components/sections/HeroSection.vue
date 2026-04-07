@@ -22,8 +22,7 @@
       </div>
 
       <!-- Headline -->
-      <h1 class="text-4xl font-medium text-[#111111] tracking-tight leading-[1.15] mb-6">
-        {{ headline }}
+      <h1 class="text-4xl font-medium text-[#111111] tracking-tight leading-[1.15] mb-6" v-html="formattedHeadline">
       </h1>
 
       <!-- Bio -->
@@ -79,8 +78,8 @@
             v-motion
             :initial="{ opacity: 0, y: 30 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 1200, type: 'keyframes', ease: [0.16, 1, 0.3, 1], delay: 200 } }"
+            v-html="formattedHeadline"
           >
-            {{ headline }}
           </h1>
         </div>
 
@@ -109,16 +108,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const { openEmail } = useEmail()
 
-defineProps<{
+const props = defineProps<{
   name: string
   headline: string
   availability: string
   photoUrl: string 
 }>()
+
+const formattedHeadline = computed(() => {
+  const color = '#9520D4'
+  
+  // ATUR TEBAL BORDER DI SINI (contoh: border-2, border-4, atau border-[1.5px])
+  const borderWeight = "border-2"
+  
+  const handleClass = `absolute w-[8px] h-[8px] bg-white border ${borderWeight} border-[#9520D4] z-10`
+  
+  return props.headline.replace(
+    'Farhan is learning',
+    `<span class="relative border ${borderWeight} border-[#9520D4] px-2 py-1 mx-1 inline-block font-bold text-[#111111]">
+      Farhan is learning
+      <!-- Corners -->
+      <span class="${handleClass} -top-[5px] -left-[5px]"></span>
+      <span class="${handleClass} -top-[5px] -right-[5px]"></span>
+      <span class="${handleClass} -bottom-[5px] -left-[5px]"></span>
+      <span class="${handleClass} -bottom-[5px] -right-[5px]"></span>
+      <!-- Midpoints -->
+      <span class="${handleClass} top-1/2 -left-[5px] -translate-y-1/2"></span>
+      <span class="${handleClass} top-1/2 -right-[5px] -translate-y-1/2"></span>
+      <span class="${handleClass} -top-[5px] left-1/2 -translate-x-1/2"></span>
+      <span class="${handleClass} -bottom-[5px] left-1/2 -translate-x-1/2"></span>
+    </span>`
+  )
+})
 
 const heroTrackRef = ref<HTMLElement | null>(null)
 const heroHovered = ref(false)
